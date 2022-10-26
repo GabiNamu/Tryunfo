@@ -70,6 +70,15 @@ class App extends React.Component {
     });
   };
 
+  deleteButton = (index, card) => {
+    const { savedCard } = this.state;
+    savedCard.splice(index, 1);
+    if (card.cardTrunfo === true) {
+      this.setState({ hasTrunfo: false });
+    }
+    this.setState({ savedCard });
+  };
+
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -110,19 +119,29 @@ class App extends React.Component {
         <ul>
           {
             savedCard !== []
-              ? savedCard.map((card) => (
-                <li key={ card.cardName }>
-                  <Card
-                    cardName={ card.cardName }
-                    cardDescription={ card.cardDescription }
-                    cardAttr1={ card.cardAttr1 }
-                    cardAttr2={ card.cardAttr2 }
-                    cardAttr3={ card.cardAttr3 }
-                    cardImage={ card.cardImage }
-                    cardRare={ card.cardRare }
-                    cardTrunfo={ card.cardTrunfo }
-                  />
-                </li>))
+              ? savedCard.map((card, index) => (
+                <div key={ card.cardName }>
+                  <li>
+                    <Card
+                      cardName={ card.cardName }
+                      cardDescription={ card.cardDescription }
+                      cardAttr1={ card.cardAttr1 }
+                      cardAttr2={ card.cardAttr2 }
+                      cardAttr3={ card.cardAttr3 }
+                      cardImage={ card.cardImage }
+                      cardRare={ card.cardRare }
+                      cardTrunfo={ card.cardTrunfo }
+                    />
+                  </li>
+                  <button
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={ () => this.deleteButton(index, card) }
+                  >
+                    Excluir
+                  </button>
+                </div>
+              ))
               : ''
           }
         </ul>
