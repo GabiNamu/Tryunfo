@@ -107,17 +107,22 @@ class Form extends Component {
           </label>
         </div>
         <div>
-          <label htmlFor="superTrunfo">
-            Super Trunfo
-            <input
-              type="checkbox"
-              name="cardTrunfo"
-              checked={ cardTrunfo }
-              data-testid="trunfo-input"
-              id="superTrunfo"
-              onChange={ onInputChange }
-            />
-          </label>
+          {
+            hasTrunfo
+              ? <p>Você já tem um Super Trunfo em seu baralho</p>
+              : (
+                <label htmlFor="superTrunfo">
+                  Super Trunfo
+                  <input
+                    type="checkbox"
+                    name="cardTrunfo"
+                    checked={ cardTrunfo }
+                    data-testid="trunfo-input"
+                    id="superTrunfo"
+                    onChange={ onInputChange }
+                  />
+                </label>)
+          }
         </div>
         <button
           data-testid="save-button"
@@ -127,7 +132,6 @@ class Form extends Component {
         >
           Salvar
         </button>
-        { hasTrunfo }
       </form>
     );
   }
