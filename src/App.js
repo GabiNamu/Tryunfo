@@ -2,18 +2,21 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 
+const INIATIAL_STATE = {
+  cardName: '',
+  cardDescription: '',
+  cardAttr1: '',
+  cardAttr2: '',
+  cardAttr3: '',
+  cardImage: '',
+  cardRare: 'normal',
+  cardTrunfo: false,
+  isSaveButtonDisabled: true,
+  savedCard: [],
+};
+
 class App extends React.Component {
-  state = {
-    cardName: '',
-    cardDescription: '',
-    cardAttr1: 0,
-    cardAttr2: 0,
-    cardAttr3: 0,
-    cardImage: '',
-    cardRare: 'normal',
-    cardTrunfo: false,
-    isSaveButtonDisabled: true,
-  };
+  state = INIATIAL_STATE;
 
   validateButton = () => {
     const { cardName, cardDescription, cardImage,
@@ -30,6 +33,35 @@ class App extends React.Component {
     const attrValidate = attrTotal > total;
     const validate = attrValidate || isValid || pointsValidate || negativeValidade;
     this.setState({ isSaveButtonDisabled: validate });
+  };
+
+  onSaveButtonClick = () => {
+    const { cardName, cardDescription, cardImage,
+      cardRare, cardAttr1, cardAttr2, cardAttr3, cardTrunf } = this.state;
+    const cardObj = {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardTrunf,
+    };
+
+    this.setState((prevState) => ({
+      savedCard: prevState.savedCard + cardObj,
+    }), () => this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+    }));
   };
 
   onInputChange = ({ target }) => {
@@ -55,6 +87,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.onSaveButtonClick }
           onInputChange={ this.onInputChange }
         />
         <Card
