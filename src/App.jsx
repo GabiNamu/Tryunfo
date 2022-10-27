@@ -13,6 +13,7 @@ const INIATIAL_STATE = {
   cardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
+  filterName: '',
   savedCard: [],
 };
 
@@ -70,6 +71,16 @@ class App extends React.Component {
     });
   };
 
+  cardsFilter = () => {
+    const { savedCard, filterName } = this.state;
+    return savedCard.filter((card) => {
+      if (filterName === '') {
+        return true;
+      }
+      return card.cardName.includes(filterName);
+    });
+  };
+
   deleteButton = (index, card) => {
     const { savedCard } = this.state;
     savedCard.splice(index, 1);
@@ -88,7 +99,8 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, savedCard } = this.state;
+      isSaveButtonDisabled, hasTrunfo, savedCard, filterName } = this.state;
+    const filterCards = this.cardsFilter();
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -116,10 +128,23 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <p>Todas as Cartas</p>
+        <div>
+          <p>Filtros de busca:</p>
+          <input
+            type="text"
+            id="name"
+            data-testid="name-filter"
+            placeholder="Nome da carta"
+            name="filterName"
+            value={ filterName }
+            onChange={ this.onInputChange }
+          />
+        </div>
         <ul>
           {
             savedCard !== []
-              ? savedCard.map((card, index) => (
+              ? filterCards.map((card, index) => (
                 <div key={ card.cardName }>
                   <li>
                     <Card
