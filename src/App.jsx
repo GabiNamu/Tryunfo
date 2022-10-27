@@ -11,7 +11,9 @@ const INIATIAL_STATE = {
   cardImage: '',
   cardRare: 'normal',
   filterRare: 'todas',
+  filterst: false,
   cardTrunfo: false,
+  isFilterDisabled: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
   filterName: '',
@@ -72,10 +74,16 @@ class App extends React.Component {
     });
   };
 
+  validateFilterInputs = () => {
+    const { filterst } = this.state;
+    const filterValidate = filterst === true;
+    this.setState({ isFilterDisabled: filterValidate });
+  };
+
   cardsFilter = () => {
-    const { savedCard, filterName, filterRare } = this.state;
+    const { savedCard, filterName, filterRare, filterst } = this.state;
     return savedCard.filter((card) => {
-      if (filterName === '' && filterRare === 'todas') {
+      if (filterName === '' && filterRare === 'todas' && filterst === false) {
         return true;
       }
       if (filterName === '' && filterRare !== 'todas') {
@@ -83,6 +91,9 @@ class App extends React.Component {
       }
       if (filterName !== '' && filterRare !== 'todas') {
         return card.cardName.includes(filterName) && card.cardRare === filterRare;
+      }
+      if (filterst === true) {
+        return card.cardTrunfo === true;
       }
       return card.cardName.includes(filterName);
     });
@@ -100,13 +111,17 @@ class App extends React.Component {
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [name]: value }, () => this.validateButton());
+    this.setState({ [name]: value }, () => {
+      this.validateButton();
+      this.validateFilterInputs();
+    });
   };
 
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, savedCard, filterName, filterRare } = this.state;
+      isSaveButtonDisabled, hasTrunfo, savedCard, filterName,
+      filterRare, filterst, isFilterDisabled } = this.state;
     const filterCards = this.cardsFilter();
     return (
       <div>
@@ -141,6 +156,7 @@ class App extends React.Component {
           <input
             type="text"
             id="name"
+            disabled={ isFilterDisabled }
             data-testid="name-filter"
             placeholder="Nome da carta"
             name="filterName"
@@ -149,6 +165,7 @@ class App extends React.Component {
           />
           <select
             name="filterRare"
+            disabled={ isFilterDisabled }
             value={ filterRare }
             id="filterRare"
             data-testid="rare-filter"
@@ -159,6 +176,17 @@ class App extends React.Component {
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
+          <label htmlFor="filterst">
+            Super trunfo
+            <input
+              type="checkbox"
+              name="filterst"
+              value={ filterst }
+              data-testid="trunfo-filter"
+              id="filterst"
+              onChange={ this.onInputChange }
+            />
+          </label>
         </div>
         <ul>
           {
