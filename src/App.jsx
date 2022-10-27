@@ -10,6 +10,7 @@ const INIATIAL_STATE = {
   cardAttr3: '',
   cardImage: '',
   cardRare: 'normal',
+  filterRare: 'todas',
   cardTrunfo: false,
   hasTrunfo: false,
   isSaveButtonDisabled: true,
@@ -72,10 +73,16 @@ class App extends React.Component {
   };
 
   cardsFilter = () => {
-    const { savedCard, filterName } = this.state;
+    const { savedCard, filterName, filterRare } = this.state;
     return savedCard.filter((card) => {
-      if (filterName === '') {
+      if (filterName === '' && filterRare === 'todas') {
         return true;
+      }
+      if (filterName === '' && filterRare !== 'todas') {
+        return card.cardRare === filterRare;
+      }
+      if (filterName !== '' && filterRare !== 'todas') {
+        return card.cardName.includes(filterName) && card.cardRare === filterRare;
       }
       return card.cardName.includes(filterName);
     });
@@ -99,7 +106,7 @@ class App extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, savedCard, filterName } = this.state;
+      isSaveButtonDisabled, hasTrunfo, savedCard, filterName, filterRare } = this.state;
     const filterCards = this.cardsFilter();
     return (
       <div>
@@ -140,6 +147,18 @@ class App extends React.Component {
             value={ filterName }
             onChange={ this.onInputChange }
           />
+          <select
+            name="filterRare"
+            value={ filterRare }
+            id="filterRare"
+            data-testid="rare-filter"
+            onChange={ this.onInputChange }
+          >
+            <option value="todas">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
         </div>
         <ul>
           {
