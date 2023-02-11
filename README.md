@@ -7,6 +7,13 @@ Tryunfo is a game in the style of Super Trunfo! By using this application a user
 - View all cards that have been added to the deck;
 - Play with created deck;
 
+<div align="center" display="inline">
+<img src="./src/images/logo.png" alt="logo" width="400px" height="250px">
+<img src="./src/images/create.png" alt="create" width="400px" height="250px">
+<img src="./src/images/cards.png" alt="cards" width="400px" heigth="450px">
+<img src="./src/images/game.png" alt="game" width="400px" heigth="450px">
+</div>
+
 ## How to use:
 - First clone the repository into your machine;
 
