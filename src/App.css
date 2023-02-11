@@ -1,0 +1,290 @@
+body {
+  background-image: linear-gradient(to right, rgb(253, 153, 196), pink);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.form-background {
+  background-color: white;
+  border-radius: 20px;
+  margin-left: 10px;
+  padding: 15px;
+  padding-left: 25px;
+  width: 400px;
+}
+
+.form-input {
+  display: block;
+}
+
+.form-only-input {
+  border-radius: 5px;
+  height: 37px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 365px;
+}
+
+.form-input-inline {
+  margin-left: 25px;
+  width: 275px;
+}
+
+.form-img {
+  margin-left: 10px;
+}
+
+.form-button-checkbox {
+  display: inline;
+}
+
+.form-button {
+  background-color: pink;
+  border-radius: 2px;
+  height: 40px;
+  margin-left: 40px;
+  padding: 8px 32px;
+  width: 115px;
+}
+
+.form-title {
+  color: pink;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 29px;
+  text-transform: uppercase;
+}
+
+.card {
+  background-color: white;
+  border-radius: 9.733px;
+  box-shadow: 0 3.893px 18.492px rgba(0, 0, 0, 0.25);
+  height: 554.33px;
+  transition: 1s;
+  width: 358.17px;
+}
+
+.card:active {
+  background-color: rgb(3, 107, 82);
+  height: 584.33px;
+  width: 388.17px;
+}
+
+.container-card {
+  background-color: rgb(3, 107, 82);
+  border-radius: 9.733px;
+  color: white;
+  height: 534.86px;
+  margin: auto;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: absolute;
+  text-align: center;
+  transition: 1s;
+  width: 338.7px;
+}
+
+.container-card:active {
+  background-color: rgb(252, 214, 220);
+  border-radius: 9.733px;
+  color: black;
+  height: 564px;
+  margin: auto;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: absolute;
+  text-align: center;
+  width: 368.7px;
+}
+
+.card-title {
+  background-color: #023031;
+  border-radius: 9.733px 9.733px 0 0;
+  color: white;
+  margin-top: 0%;
+}
+
+.card-img {
+  height: 270.57px;
+  margin: auto;
+  width: 308.53px;
+}
+
+.div-attr-card {
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 120.22px;
+  justify-content: center;
+  margin: auto;
+  padding: 5px;
+  width: 308.53px;
+}
+
+.color {
+  color: black;
+  display: inline;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.card-raridade {
+  display: inline;
+  margin-top: 10px;
+}
+
+.card-attr {
+  background: rgb(240, 242, 245);
+  border-radius: 9.733px;
+  color: rgb(61, 73, 92);
+  display: inline;
+  font-size: 15.572px;
+  font-style: normal;
+  font-weight: 600;
+  height: 29.92px;
+  line-height: 150%;
+  padding: 2px;
+  width: 276.41px;
+}
+
+.card-attr-number {
+  background: #023031;
+  border-radius: 0 9.733px 9.733px 0;
+  display: inline;
+  font-size: 15.572px;
+  font-style: normal;
+  font-weight: 600;
+  height: 29.92px;
+  line-height: 150%;
+  padding: 2px;
+  width: 46.72px;
+}
+
+.img-card-st {
+  height: 100px;
+  margin-left: 70px;
+  margin-top: 260px;
+  position: absolute;
+  transform: rotate(20deg);
+  width: 100px;
+}
+
+.ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.cards-all {
+  list-style: none;
+}
+
+.card-button {
+  background-color: rgba(236, 70, 70, 0.95);
+  border-radius: 5px;
+  height: 40px;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-left: 110px;
+  margin-top: 10px;
+  padding: 8px 32px;
+  width: 120px;
+}
+
+.divi {
+  width: 338.7px;
+}
+
+.filter-title {
+  color: white;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 29px;
+  margin-left: 43%;
+  margin-top: 100px;
+  text-shadow: -3px 4px 6px gray;
+  text-transform: uppercase;
+}
+
+.filter-background {
+  align-items: center;
+  background-color: rgb(3, 107, 82);
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  display: flex;
+  font-size: 20px;
+  height: 75px;
+  justify-content: space-evenly;
+  margin: auto;
+  width: 1124px;
+}
+
+.filter-input {
+  background-color: rgb(3, 107, 82);
+  border: 1px solid rgb(254, 250, 250);
+  border-radius: 6px;
+  color: white;
+  font-size: 20px;
+  height: 45px;
+  width: 332px;
+}
+
+.form-card {
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 19px rgba(0, 0, 0, 0.8);
+  display: flex;
+  height: 721px;
+  justify-content: space-around;
+  margin: auto;
+  width: 1124px;
+}
+
+.button-embaralhar {
+  background: rgb(47, 193, 140);
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  height: 36px;
+  line-height: 150%;
+  margin-top: 15px;
+  width: 183px;
+}
+
+.game-div {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.backCard-img {
+  margin: auto;
+  width: 350px;
+}
+
+.container-Backcard {
+  background-color: rgb(2, 48, 49);
+  border-radius: 9.733px;
+  color: white;
+  display: flex;
+  height: 534.86px;
+  margin: auto;
+  margin-left: 10px;
+  margin-top: 10px;
+  position: absolute;
+  text-align: center;
+  width: 338.7px;
+}

@@ -9,11 +9,13 @@ class Form extends Component {
       hasTrunfo, isSaveButtonDisabled,
       onInputChange, onSaveButtonClick } = this.props;
     return (
-      <form action="">
+      <form action="" className="form-background">
+        <h3 className="form-title">ADICIONE NOVA CARTA:</h3>
         <div>
-          <label htmlFor="name">
+          <label htmlFor="name" className="form-input">
             Nome:
             <input
+              className="form-input form-only-input"
               type="text"
               value={ cardName }
               data-testid="name-input"
@@ -24,9 +26,10 @@ class Form extends Component {
           </label>
         </div>
         <div>
-          <label htmlFor="descricao">
+          <label htmlFor="descricao" className="form-input">
             Descrição:
             <textarea
+              className="form-input form-only-input"
               name="cardDescription"
               id="descricao"
               value={ cardDescription }
@@ -41,6 +44,7 @@ class Form extends Component {
           <label htmlFor="attr01">
             Attr01
             <input
+              className="form-only-input form-input-inline"
               type="number"
               value={ cardAttr1 }
               name="cardAttr1"
@@ -54,6 +58,7 @@ class Form extends Component {
           <label htmlFor="attr02">
             Attr02
             <input
+              className="form-only-input form-input-inline"
               type="number"
               value={ cardAttr2 }
               name="cardAttr2"
@@ -67,6 +72,7 @@ class Form extends Component {
           <label htmlFor="attr03">
             Attr03
             <input
+              className="form-only-input form-input-inline"
               type="number"
               name="cardAttr3"
               value={ cardAttr3 }
@@ -80,6 +86,7 @@ class Form extends Component {
           <label htmlFor="img">
             Imagem:
             <input
+              className="form-only-input form-input-inline form-img"
               type="text"
               name="cardImage"
               value={ cardImage }
@@ -90,9 +97,10 @@ class Form extends Component {
           </label>
         </div>
         <div>
-          <label htmlFor="raridade">
+          <label htmlFor="raridade" className="form-input">
             Raridade:
             <select
+              className="form-input form-only-input"
               name="cardRare"
               value={ cardRare }
               id="raridade"
@@ -107,31 +115,35 @@ class Form extends Component {
           </label>
         </div>
         <div>
-          {
-            hasTrunfo
-              ? <p>Você já tem um Super Trunfo em seu baralho</p>
-              : (
-                <label htmlFor="superTrunfo">
-                  Super Trunfo
-                  <input
-                    type="checkbox"
-                    name="cardTrunfo"
-                    checked={ cardTrunfo }
-                    data-testid="trunfo-input"
-                    id="superTrunfo"
-                    onChange={ onInputChange }
-                  />
-                </label>)
-          }
+          <div className="form-button-checkbox">
+            {
+              hasTrunfo
+                ? <p>Você já tem um Super Trunfo em seu baralho</p>
+                : (
+                  <label htmlFor="superTrunfo" className="form-button-checkbox">
+                    Super Trunfo
+                    <input
+                      className="form-button-checkbox"
+                      type="checkbox"
+                      name="cardTrunfo"
+                      checked={ cardTrunfo }
+                      data-testid="trunfo-input"
+                      id="superTrunfo"
+                      onChange={ onInputChange }
+                    />
+                  </label>)
+            }
+          </div>
+          <button
+            className="form-button-checkbox form-button"
+            data-testid="save-button"
+            disabled={ isSaveButtonDisabled }
+            type="button"
+            onClick={ onSaveButtonClick }
+          >
+            Salvar
+          </button>
         </div>
-        <button
-          data-testid="save-button"
-          disabled={ isSaveButtonDisabled }
-          type="button"
-          onClick={ onSaveButtonClick }
-        >
-          Salvar
-        </button>
       </form>
     );
   }

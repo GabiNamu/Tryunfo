@@ -1,6 +1,11 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import './App.css';
+import imglogo from './logo_tryunfo.png';
+import BackCard from './components/BackCard';
+import Filter from './components/Filter';
+import Buttons from './components/Buttons';
 
 const INIATIAL_STATE = {
   cardName: '',
@@ -18,6 +23,11 @@ const INIATIAL_STATE = {
   isSaveButtonDisabled: true,
   filterName: '',
   savedCard: [],
+  randomCards: '',
+  next: 0,
+  dis: 'block',
+  buttonDis: 'none',
+  background: '',
 };
 
 class App extends React.Component {
@@ -80,6 +90,21 @@ class App extends React.Component {
     this.setState({ isFilterDisabled: filterValidate });
   };
 
+  startRandomCards = () => {
+    const { savedCard } = this.state;
+    const number = 0.5;
+    const listCards = savedCard.sort(() => Math.random() - number);
+    console.log(listCards);
+
+    this.setState({
+      randomCards: listCards,
+      dis: 'none',
+      next: 0,
+      background: 'ul form-card',
+      buttonDis: 'flex',
+    });
+  };
+
   cardsFilter = () => {
     const { savedCard, filterName, filterRare, filterst } = this.state;
     return savedCard.filter((card) => {
@@ -108,6 +133,20 @@ class App extends React.Component {
     this.setState({ savedCard });
   };
 
+  nextButton = () => {
+    this.setState((prevState) => ({
+      next: prevState.next + 1,
+    }));
+  };
+
+  endGameButton = () => {
+    this.setState({
+      dis: 'block',
+      background: '',
+      randomCards: '',
+    });
+  };
+
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -118,95 +157,45 @@ class App extends React.Component {
   };
 
   render() {
-    const { cardName, cardDescription, cardAttr1,
-      cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo,
-      isSaveButtonDisabled, hasTrunfo, savedCard, filterName,
-      filterRare, filterst, isFilterDisabled } = this.state;
+    const { savedCard, randomCards,
+      next, dis, background } = this.state;
     const filterCards = this.cardsFilter();
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          onInputChange={ this.onInputChange }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <p>Todas as Cartas</p>
-        <div>
-          <p>Filtros de busca:</p>
-          <input
-            type="text"
-            id="name"
-            disabled={ isFilterDisabled }
-            data-testid="name-filter"
-            placeholder="Nome da carta"
-            name="filterName"
-            value={ filterName }
-            onChange={ this.onInputChange }
-          />
-          <select
-            name="filterRare"
-            disabled={ isFilterDisabled }
-            value={ filterRare }
-            id="filterRare"
-            data-testid="rare-filter"
-            onChange={ this.onInputChange }
-          >
-            <option value="todas">todas</option>
-            <option value="normal">normal</option>
-            <option value="raro">raro</option>
-            <option value="muito raro">muito raro</option>
-          </select>
-          <label htmlFor="filterst">
-            Super trunfo
-            <input
-              type="checkbox"
-              name="filterst"
-              value={ filterst }
-              data-testid="trunfo-filter"
-              id="filterst"
-              onChange={ this.onInputChange }
-            />
-          </label>
+        <div className="logo">
+          <img src={ imglogo } alt="tryunfo" />
         </div>
-        <ul>
+        <div className="form-card">
+          <Form
+            { ...this.state }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            onInputChange={ this.onInputChange }
+          />
+          <Card
+            { ...this.state }
+          />
+        </div>
+        <p className="filter-title">Todas as Cartas</p>
+        <Filter { ...this.state } onInputChange={ this.onInputChange } />
+        <ul className="ul">
           {
             savedCard !== []
               ? filterCards.map((card, index) => (
-                <div key={ card.cardName }>
-                  <li>
+                <div key={ card.cardName } style={ { display: dis } }>
+                  <li className="cards-all">
                     <Card
                       cardName={ card.cardName }
                       cardDescription={ card.cardDescription }
+                      cardImage={ card.cardImage }
                       cardAttr1={ card.cardAttr1 }
                       cardAttr2={ card.cardAttr2 }
                       cardAttr3={ card.cardAttr3 }
-                      cardImage={ card.cardImage }
-                      cardRare={ card.cardRare }
                       cardTrunfo={ card.cardTrunfo }
                     />
                   </li>
                   <button
                     type="button"
+                    className="card-button"
                     data-testid="delete-button"
                     onClick={ () => this.deleteButton(index, card) }
                   >
@@ -217,6 +206,35 @@ class App extends React.Component {
               : ''
           }
         </ul>
+        <ul className={ background }>
+          {randomCards !== ''
+            ? (
+              <div className="game-div">
+                <li className="cards-all">
+                  <Card
+                    cardName={ randomCards[next].cardName }
+                    cardDescription={ randomCards[next].cardDescription }
+                    cardImage={ randomCards[next].cardImage }
+                    cardAttr1={ randomCards[next].cardAttr1 }
+                    cardAttr2={ randomCards[next].cardAttr2 }
+                    cardAttr3={ randomCards[next].cardAttr3 }
+                    cardTrunfo={ randomCards[next].cardTrunfo }
+                  />
+                </li>
+                <li className="cards-all">
+                  <BackCard />
+                </li>
+              </div>
+            )
+            : ''}
+        </ul>
+        <Buttons
+          { ...this.state }
+          nextButton={ this.nextButton }
+          startRandomCards={ this.startRandomCards }
+          endGameButton={ this.endGameButton }
+          randomCards={ randomCards }
+        />
       </div>
     );
   }
