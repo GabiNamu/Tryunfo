@@ -18,11 +18,12 @@ Tryunfo is a game in the style of Super Trunfo! By using this application a user
 - First clone the repository into your machine;
 
 ```
-git clone git@github.com:GabiNamu/trybewallet.git
+git clone git@github.com:GabiNamu/Tryunfo.git
 ```
+
 - Go to the project directory:
 ```
-cd recipes
+cd Tryunfo
 ```
  
 - Install dependencies;
