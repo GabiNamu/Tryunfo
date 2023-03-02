@@ -14,18 +14,23 @@ Tryunfo is a game in the style of Super Trunfo! By using this application a user
 <img src="./src/images/game.png" alt="game" width="400px" heigth="450px">
 </div>
 
-## How to use:
+## Run locally:
 - First clone the repository into your machine;
 
 ```
- git clone git@github.com:GabiNamu/trybewallet.git
+git clone git@github.com:GabiNamu/trybewallet.git
 ```
-- After cloning, enter into the repository and install the dependencies;
+- Go to the project directory:
+```
+cd recipes
+```
+ 
+- Install dependencies;
 
 ```
 npm install
 ```
-- Then to see in your browser, you just need to do a npm start;
+- Start the server;
 ```
 npm start
 ```
