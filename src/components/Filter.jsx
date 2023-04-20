@@ -7,7 +7,7 @@ class Filter extends Component {
       filterRare, filterst } = this.props;
     return (
       <div className="filter-background">
-        <p>Filtros de busca:</p>
+        <p className="filter-input-title">Filtros de busca:</p>
         <input
           type="text"
           id="name"
@@ -33,11 +33,12 @@ class Filter extends Component {
           <option value="raro">raro</option>
           <option value="muito raro">muito raro</option>
         </select>
-        <label htmlFor="filterst">
-          Super trunfo
+        <label htmlFor="filterst" className="filter-container-checkbox">
+          <p className="filter-input-title">Super trunfo</p>
           <input
             type="checkbox"
             name="filterst"
+            className="filter-checkbox"
             value={ filterst }
             data-testid="trunfo-filter"
             id="filterst"
